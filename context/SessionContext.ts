@@ -1,12 +1,13 @@
 import { createContext } from "react";
 import { LoginInput, RegisterInput } from "../helpers/types/user.controller";
+import { IUser } from "../helpers/types/user.dto";
 
 export type CreateContextProps = {
   handleSignIn: (event:LoginInput) => Promise<any>
   handleSignUp: (event: RegisterInput) => Promise<any>
   handleSignOut: () => Promise<void>
   isAuthenticated: boolean
-  user: object | null
+  user: IUser | null
 }
 
 export const SessionContext = createContext<CreateContextProps>({

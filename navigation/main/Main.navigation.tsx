@@ -8,7 +8,7 @@ return (
     <Navigator initialRouteName={RootStackRoutesEnum.Home}>
             {Object.values(RootStackRoutesEnum).map((route,index)=>{
                 return (
-                    <Screen key={index} name={route} component={MainComponents[route]}/>
+                    <Screen key={index} name={route} component={MainComponents[route]} options={{headerShown: route != RootStackRoutesEnum.Home}}/>
                 )
             })}    
         </Navigator>
