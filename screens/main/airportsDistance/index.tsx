@@ -1,6 +1,6 @@
 import { View,Text } from 'react-native';
 
-export const Profile = ():JSX.Element => {
+export const AirportsDistanceScreen = ():JSX.Element => {
 //constants
 
 //states
@@ -15,7 +15,7 @@ export const Profile = ():JSX.Element => {
 
     return (
         <View>
-           <Text>Profile</Text>
+           <Text>AirportsDistanceScreen</Text>
         </View>
     );
 }
