@@ -1,6 +1,8 @@
 import { ParamListBase, RouteProp } from "@react-navigation/core";
 import { ComponentType } from "react";
 import { Login } from "../../screens/auth/login";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Register } from "../../screens/auth/register";
 
 // All the routes in the navigator
 export type AuthStackNavigator = {
@@ -39,6 +41,8 @@ type RouteComponentsType = {
 // Here, we select the component according to the value in the array
 export const AuthComponents: RouteComponentsType = {
   [AuthStackRoutesEnum.Login]: Login,
-  [AuthStackRoutesEnum.Register]: Login, 
+  [AuthStackRoutesEnum.Register]: Register, 
   [AuthStackRoutesEnum.ForgotPassword]: Login,
 }
+
+export type authNavProp = NativeStackNavigationProp<AuthStackNavigator>;

@@ -8,8 +8,9 @@ import { schemaLogin } from '../../../helpers/schemas/login.schema';
 import { InferType } from 'yup';
 import { Colors } from '../../../theme/colors';
 import { LoginFormFields } from '../../../helpers/types/user.dto';
-import { useIsFocused } from '@react-navigation/core';
+import { useIsFocused, useNavigation } from '@react-navigation/core';
 import { useEffect } from 'react';
+import { authNavProp } from '../../../navigation/auth/types';
 
 export interface ILoginDTO {
   user_name: string
@@ -24,19 +25,25 @@ export const Login = ():JSX.Element => {
 //states
 
 //hooks
-const isFocused= useIsFocused()
+const {navigate} = useNavigation<authNavProp>()
 const {
     handleSubmit,
     control,
-    formState: { isSubmitting },setValue
+    formState: { isSubmitting },
   } = useForm<FormType>()
 //functions
-
+function handleNavigate(route:'register'|'forgot_password'): void{
+    switch(route){
+        case 'register':
+            navigate('Register')
+            break;
+        case 'forgot_password':
+            navigate('ForgotPassword')
+            break;
+    }
+}
 //effects
-  useEffect(() => {
-    setValue(LoginFormFields.userName, '')
-    setValue(LoginFormFields.userPass, '')
-  }, [isFocused])
+
 //render
 
     return (
@@ -57,7 +64,7 @@ const {
                 <Button title="Sign In" color={Colors.orange} trailing={props => <Icon name="arrow-right" {...props} />} loading={isSubmitting} />
                 </VStack>
             </View>
-                <Pressable>
+                <Pressable onPress={()=>handleNavigate('register')}>
                     <Text variant='caption' color={Colors.orange}> 
                         Create an account.
                     </Text>
