@@ -1,21 +1,21 @@
-import { View,Text } from 'react-native';
+import { View, Text } from 'react-native'
 
-export const AirportsDistanceScreen = ():JSX.Element => {
-//constants
+export const AirportsDistanceScreen = (): JSX.Element => {
+    //constants
 
-//states
+    //states
 
-//hooks
+    //hooks
 
-//functions
+    //functions
 
-//effects
+    //effects
 
-//render
+    //render
 
     return (
         <View>
-           <Text>AirportsDistanceScreen</Text>
+            <Text>AirportsDistanceScreen</Text>
         </View>
-    );
+    )
 }

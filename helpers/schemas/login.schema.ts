@@ -3,11 +3,11 @@ import { emailValidation, passwordValidation } from './common.schema'
 import { LoginInput } from '../types/user.controller'
 
 export const schemaLogin: yup.Schema<LoginInput> = yup
-  .object({
-    user_name: emailValidation,
-    password: yup.string().required('Éste campo es requerido'),
-  })
-  .required()
+    .object({
+        user_name: emailValidation,
+        password: yup.string().required('Éste campo es requerido'),
+    })
+    .required()
 
 // export const schemaRecoveryPassword = yup
 //   .object({

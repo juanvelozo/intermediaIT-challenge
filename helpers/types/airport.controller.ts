@@ -1,3 +1,3 @@
-import { IAirportDTO } from "./airport.dto";
+import { IAirportDTO } from './airport.dto'
 
 export type Airport = IAirportDTO

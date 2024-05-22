@@ -28,16 +28,17 @@ export const Input = <T extends FieldValues>({
     password,
     ...props
 }: Props<T> & TextInputProps) => {
-
     // hooks
-    const { field: { onBlur, onChange, value } } = useController<T, Path<T>>({
+    const {
+        field: { onBlur, onChange, value },
+    } = useController<T, Path<T>>({
         name: nameInput,
         defaultValue,
         rules: { required },
         control,
     })
 
-  // render
+    // render
     return (
         <TextInput
             value={value}

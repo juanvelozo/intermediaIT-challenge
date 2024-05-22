@@ -1,29 +1,28 @@
-
 //@ts-ignore - Using "ts-ignore" because this issue https://github.com/firebase/firebase-js-sdk/issues/7584#issuecomment-1785705367
-import { getReactNativePersistence } from '@firebase/auth/dist/rn/index.js';
+import { getReactNativePersistence } from '@firebase/auth/dist/rn/index.js'
 
-import { initializeAuth} from "firebase/auth"
+import { initializeAuth } from 'firebase/auth'
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getFirestore, collection } from "firebase/firestore";
+import { initializeApp } from 'firebase/app'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { getFirestore, collection } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAPFqEvlCHID2uhGaltexMLc8q7aNa6I6U",
-  authDomain: "intermediait-challenge.firebaseapp.com",
-  projectId: "intermediait-challenge",
-  storageBucket: "intermediait-challenge.appspot.com",
-  messagingSenderId: "719292968033",
-  appId: "1:719292968033:web:787bac1c37bcd61365ce20"
-};
+    apiKey: 'AIzaSyAPFqEvlCHID2uhGaltexMLc8q7aNa6I6U',
+    authDomain: 'intermediait-challenge.firebaseapp.com',
+    projectId: 'intermediait-challenge',
+    storageBucket: 'intermediait-challenge.appspot.com',
+    messagingSenderId: '719292968033',
+    appId: '1:719292968033:web:787bac1c37bcd61365ce20',
+}
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig)
 
-export const auth = initializeAuth(app,{
-    persistence: getReactNativePersistence(AsyncStorage)
+export const auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(AsyncStorage),
 })
 
 export const db = getFirestore(app)

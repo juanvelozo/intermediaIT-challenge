@@ -1,64 +1,135 @@
-import {  Pressable } from 'react-native';
-import { useAuth } from '../../../hooks/useAuth';
-import { Layout } from '../../../components/Layout';
-import { Text, TextInput } from '@react-native-material/core';
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { useState } from 'react';
-import { airports } from '../../../data/airports';
-import { Airport } from '../../../helpers/types/airport.controller';
-import { useNavigation } from '@react-navigation/core';
-import { mainNavProp } from '../../../navigation/main/types';
+import { FlatList, Pressable } from 'react-native'
+import { useAuth } from '../../../hooks/useAuth'
+import { Layout } from '../../../components/Layout'
+import { Divider, Text, TextInput } from '@react-native-material/core'
+import Icon from '@expo/vector-icons/MaterialCommunityIcons'
+import { useState } from 'react'
+import { airportsList } from '../../../data/airports'
+import { Airport } from '../../../helpers/types/airport.controller'
+import { useNavigation } from '@react-navigation/core'
+import { mainNavProp } from '../../../navigation/main/types'
+import { AirportItem } from '../../../components/features/airport/AirportItem'
 
-export const Home = ():JSX.Element => {
+export const Home = (): JSX.Element => {
     //constants
 
     //states
     const [showResultsA, setShowResultsA] = useState<boolean>(false)
     const [airportA, setAirportA] = useState<Airport | undefined>()
+    const [inputAValue, setInputAValue] = useState<string>('')
     const [showResultsB, setShowResultsB] = useState<boolean>(false)
     const [airportB, setAirportB] = useState<Airport | undefined>()
     //hooks
     const { handleSignOut } = useAuth()
-    const {navigate} = useNavigation<mainNavProp>()
+    const { navigate } = useNavigation<mainNavProp>()
     //functions
-    async function logout(){
+    async function logout() {
         await handleSignOut()
     }
 
-    function handleNavigate():void{
-        navigate('DistanceScreen',{airportsList: airports})
+    function handleNavigate(): void {
+        navigate('DistanceScreen', { airportsList: airportsList })
     }
-    //effects    
+    //effects
     //render
     return (
         <Layout>
-            {!showResultsA && !showResultsB && <>
-                <Pressable onPress={logout} style={{alignSelf:'flex-end', justifyContent: 'center', alignItems:'center'}}>
-                    <Icon name='exit-to-app' color="red" size={30}/>
-                    <Text variant='caption'color='red'>Sign out</Text>
-                </Pressable>
-                <Text variant='h3'>Hello again👋</Text>
-                <Text variant='subtitle1'>Search on a list of {airports.length} airports on the United States!</Text>
-                <TextInput variant='standard' placeholder='Airport A' onFocus={()=> setShowResultsA(true)}/>
-                <TextInput variant='standard' placeholder='Airport B' onFocus={()=> setShowResultsB(true)}/>
-            </>
-            }
-            {showResultsA && 
-            <>
-                <TextInput variant='standard' placeholder='Airport A' autoFocus leading={()=> <Pressable onPress={()=>{setShowResultsA(false)}}>
-                    <Icon name='close' size={20} />
-                </Pressable>}/>
-                <Text variant='h6'>No results</Text>
-            </>
-            }
-            {showResultsB && 
+            {!showResultsA && !showResultsB && (
+                <>
+                    <Pressable
+                        onPress={logout}
+                        style={{
+                            alignSelf: 'flex-end',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}>
+                        <Icon name="exit-to-app" color="red" size={30} />
+                        <Text variant="caption" color="red">
+                            Sign out
+                        </Text>
+                    </Pressable>
+                    <Text variant="h3">Hello again👋</Text>
+                    <Text variant="subtitle1">
+                        Search on a list of {airportsList.length} airports on
+                        the United States!
+                    </Text>
+                    <TextInput
+                        variant="standard"
+                        placeholder="Airport A"
+                        onFocus={() => setShowResultsA(true)}
+                        value={
+                            airportA
+                                ? `${airportA?.AIRPORT}, ${airportA?.STATE}`
+                                : ''
+                        }
+                    />
+                    <TextInput
+                        variant="standard"
+                        placeholder="Airport B"
+                        onFocus={() => setShowResultsB(true)}
+                    />
+                </>
+            )}
+            {showResultsA && (
+                <>
+                    <TextInput
+                        clearButtonMode="always"
+                        onChangeText={text => {
+                            setInputAValue(text)
+                        }}
+                        value={inputAValue}
+                        variant="standard"
+                        placeholder="Search for an airport"
+                        autoFocus
+                        leading={() => (
+                            <Pressable
+                                onPress={() => {
+                                    setShowResultsA(false)
+                                }}>
+                                <Icon name="close" size={20} />
+                            </Pressable>
+                        )}
+                    />
+                    <FlatList
+                        maxToRenderPerBatch={10}
+                        keyExtractor={(_item, index) => index.toString()}
+                        ItemSeparatorComponent={() => <Divider />}
+                        data={
+                            inputAValue.toLowerCase() === ''
+                                ? airportsList
+                                : airportsList.filter(item =>
+                                      item.AIRPORT.toLowerCase().includes(
+                                          inputAValue.toLowerCase()
+                                      )
+                                  )
+                        }
+                        renderItem={({ item }) => (
+                            <Pressable
+                                onPress={() => {
+                                    if (airportA) {
+                                        setAirportA(undefined)
+                                    } else {
+                                        setAirportA(item)
+                                        setShowResultsA(false)
+                                    }
+                                }}>
+                                <AirportItem
+                                    {...item}
+                                    isSelected={Boolean(airportA == item)}
+                                />
+                            </Pressable>
+                        )}
+                    />
+                </>
+            )}
+            {/* {showResultsB && 
             <>
                 <TextInput variant='standard' placeholder='Airport B' autoFocus leading={()=> <Pressable onPress={()=>{setShowResultsB(false)}}>
                     <Icon name='close' size={20} />
                 </Pressable>}/>
-                <Text variant='h6'>No results</Text>
+                <FlatList maxToRenderPerBatch={10} ItemSeparatorComponent={()=><Divider/>} data={airports} renderItem={({item})=>(<AirportItem {...item}/>)}/>
             </>
-            }
+            } */}
         </Layout>
-    );
+    )
 }

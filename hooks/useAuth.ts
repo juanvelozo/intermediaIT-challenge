@@ -1,6 +1,6 @@
-import { useContext } from "react"
-import { SessionContext } from "../context/SessionContext"
+import { useContext } from 'react'
+import { SessionContext } from '../context/SessionContext'
 
 export const useAuth = () => {
-  return useContext(SessionContext)
+    return useContext(SessionContext)
 }
