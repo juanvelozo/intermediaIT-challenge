@@ -8,7 +8,7 @@ import { AirportsDistanceScreen } from '../../screens/main/airportsDistance'
 // All the routes in the navigator
 export type RootStackNavigator = {
     Home: undefined
-    DistanceScreen: { airportsList: Airport[] }
+    DistanceScreen: { airportA: Airport; airportB: Airport }
 }
 
 // An enum to enumerate all routes

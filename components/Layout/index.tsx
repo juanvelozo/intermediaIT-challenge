@@ -1,10 +1,12 @@
 import { FC } from 'react'
 import { View } from 'react-native'
 import { ILayoutProps } from './types'
+import { styles } from './styles'
 
 export const Layout: FC<ILayoutProps> = (props): JSX.Element => {
     //constants
     const { backgroundColor } = props
+    const style = styles(backgroundColor!)
     //states
 
     //hooks
@@ -16,15 +18,7 @@ export const Layout: FC<ILayoutProps> = (props): JSX.Element => {
     //render
 
     return (
-        <View
-            {...props}
-            style={{
-                backgroundColor: backgroundColor,
-                paddingVertical: 40,
-                paddingHorizontal: 20,
-                flex: 1,
-                maxWidth: 420,
-            }}>
+        <View {...props} style={style.layout}>
             {props.children}
         </View>
     )
