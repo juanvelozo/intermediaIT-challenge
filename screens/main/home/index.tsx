@@ -111,7 +111,7 @@ export const Home = (): JSX.Element => {
                                 : 'Select 2 airports to continue'
                         }
                         disableElevation
-                        // disabled={!airportA || !airportB}
+                        disabled={!airportA || !airportB}
                     />
                 </>
             )}

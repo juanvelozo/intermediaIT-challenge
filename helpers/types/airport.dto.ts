@@ -3,7 +3,6 @@ export interface IAirportDTO {
     AIRPORT: string
     CITY: string
     STATE: string
-    COUNTRY: string
     LATITUDE: number
     LONGITUDE: number
 }
