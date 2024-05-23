@@ -15,9 +15,9 @@ export const Home = (): JSX.Element => {
     const [showResultsA, setShowResultsA] = useState<boolean>(false)
     const [airportA, setAirportA] = useState<Airport | undefined>()
     const [inputAValue, setInputAValue] = useState<string>('')
-    const [inputBValue, setInputBValue] = useState<string>('')
     const [showResultsB, setShowResultsB] = useState<boolean>(false)
     const [airportB, setAirportB] = useState<Airport | undefined>()
+    const [inputBValue, setInputBValue] = useState<string>('')
     //hooks
     const focusedScreen = useIsFocused()
     const { handleSignOut } = useAuth()
