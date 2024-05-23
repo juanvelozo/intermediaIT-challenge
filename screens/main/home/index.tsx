@@ -11,8 +11,6 @@ import { mainNavProp } from '../../../navigation/main/types'
 import { AirportItem } from '../../../components/features/airport/AirportItem'
 
 export const Home = (): JSX.Element => {
-    //constants
-
     //states
     const [showResultsA, setShowResultsA] = useState<boolean>(false)
     const [airportA, setAirportA] = useState<Airport | undefined>()
@@ -30,11 +28,16 @@ export const Home = (): JSX.Element => {
     }
 
     function handleNavigate(): void {
-        navigate('DistanceScreen', { airportA: airportA!, airportB: airportB! })
+        if(airportA && airportB){
+            navigate('DistanceScreen', { airportA: airportA, airportB: airportB })
+        }
     }
+
     function cleanStates(): void {
         setAirportA(undefined)
         setAirportB(undefined)
+        setInputAValue('')
+        setInputBValue('')
     }
     //effects
     useEffect(() => {

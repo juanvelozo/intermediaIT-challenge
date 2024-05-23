@@ -6,11 +6,12 @@ import { initializeAuth } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { getFirestore, collection } from 'firebase/firestore'
+import {FIREBASE_API_KEY} from '@env'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: 'AIzaSyAPFqEvlCHID2uhGaltexMLc8q7aNa6I6U',
+    apiKey: FIREBASE_API_KEY,
     authDomain: 'intermediait-challenge.firebaseapp.com',
     projectId: 'intermediait-challenge',
     storageBucket: 'intermediait-challenge.appspot.com',

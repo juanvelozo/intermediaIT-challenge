@@ -28,7 +28,7 @@ export const AirportsDistanceScreen = (): JSX.Element => {
     //hooks
     const mapRef = useRef<MapView>(null)
     const { setOptions } = useNavigation<mainNavProp>()
-const focusedScreen = useIsFocused()
+    const focusedScreen = useIsFocused()
     //functions
 
     //effects
@@ -47,7 +47,7 @@ const focusedScreen = useIsFocused()
                 animated: true,
             }
         )
-    }, [mapRef,focusedScreen])
+    }, [mapRef,focusedScreen, airportA, airportB])
 
     //render
 
@@ -110,14 +110,12 @@ const focusedScreen = useIsFocused()
             <MapView
                 ref={mapRef}
                 liteMode
-                zoomEnabled={false}
-                scrollEnabled={false}
                 toolbarEnabled={false}
                 initialRegion={{
                     latitude: airportA.LATITUDE,
                     longitude: airportA.LONGITUDE,
-                    latitudeDelta: 9,
-                    longitudeDelta: 9,
+                    latitudeDelta: 0.09,
+                    longitudeDelta: 0.04,
                 }}
                 style={{ width: '100%', height: 300 }}>
                 <Marker
